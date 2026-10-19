@@ -93,9 +93,7 @@ def validate_analysis(data: dict[str, Any]) -> dict[str, Any]:
 
 
 def analyze_message(message: str, message_type: str, client: Groq) -> dict[str, Any]:
-    
     system_prompt =
-
    .strip()
 
     user_prompt = (
