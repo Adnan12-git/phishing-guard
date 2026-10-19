@@ -1,0 +1,92 @@
+PHISHGUARD AI
+Project Presentation Notes
+==========================
+
+1. PROJECT OVERVIEW
+PhishGuard AI is a web application that helps users assess suspicious emails and SMS messages. A user pastes message text, selects the message type, and receives an AI-generated risk score and explanation.
+
+2. PROBLEM STATEMENT
+Phishing and social-engineering messages can pressure people into clicking unsafe links, sharing credentials, revealing OTPs, or making fraudulent payments. Users need a quick, understandable first-pass assessment.
+
+3. OBJECTIVES
+- Build a simple, accessible Streamlit interface.
+- Use a Groq-hosted large language model for text analysis.
+- Return a score from 0 to 100 and a risk category.
+- Explain possible warning signs in plain language.
+- Offer safe, practical next steps.
+- Deploy the app through GitHub and Streamlit Community Cloud.
+
+4. TECHNOLOGY STACK
+- Python: application logic
+- Streamlit: user interface
+- Groq Python SDK: model API integration
+- Groq-hosted language model: message assessment
+- GitHub: source-code hosting and version history
+- Streamlit Community Cloud: deployment
+
+5. HOW IT WORKS
+Step 1: The user chooses Email or SMS.
+Step 2: The user pastes the message text.
+Step 3: The app checks that the input is not empty and is within the length limit.
+Step 4: The app sends the message to Groq as untrusted text.
+Step 5: The model returns structured JSON with a score, level, summary, indicators, and recommendations.
+Step 6: The app validates the response and displays the assessment.
+
+6. RISK SCORE GUIDE
+0–24: Low
+25–49: Medium
+50–74: High
+75–100: Critical
+
+The score is a model-generated estimate based on the submitted text. It is not a verified probability of fraud.
+
+7. SECURITY AND PRIVACY
+- The API key is stored outside the source code.
+- Streamlit Cloud secrets are used for deployed configuration.
+- The app does not intentionally store a history database.
+- The user is warned not to paste passwords, OTPs, payment details, or confidential information.
+- Submitted text is sent to Groq for inference.
+- Prompt instructions treat the submitted message as untrusted data.
+- The app does not open URLs, scan attachments, or verify the sender.
+
+8. TESTING
+Suggested manual tests:
+- Empty input should show a validation message.
+- A sample suspicious SMS should produce an assessment if the API is configured.
+- A benign-looking sample should still be treated cautiously.
+- Missing API credentials should show a clear setup message.
+- Invalid model IDs and API errors should be handled without exposing credentials.
+- Review the score, explanation, indicators, and recommendations for clarity.
+
+9. LIMITATIONS
+- Language models can be wrong or inconsistent.
+- Text-only analysis may miss spoofed sender addresses, malicious destinations, and attachment threats.
+- Legitimate messages can look suspicious and malicious messages can look convincing.
+- The model and provider's availability, policies, and rate limits may change.
+- The result should not be the sole basis for a security decision.
+
+10. FUTURE IMPROVEMENTS
+- Safe URL reputation and domain-age checks
+- Email-header and sender-authentication analysis
+- Multilingual support
+- Downloadable reports
+- Optional feedback and evaluation dataset
+- Rate limiting and access controls
+- More systematic evaluation using labeled phishing and benign examples
+
+11. DEMONSTRATION PLAN
+1. Open the deployed Streamlit app.
+2. Select a sample suspicious delivery SMS.
+3. Click Analyze risk.
+4. Explain the score, risk category, warning signs, and recommendations.
+5. Demonstrate the missing-key behavior only in a local test environment.
+6. Explain the limitations and privacy safeguards.
+
+12. CONCLUSION
+PhishGuard AI provides a simple first-pass assessment of suspicious message text. It combines a lightweight web interface with AI-generated explanations while emphasizing that human caution and independent verification remain essential.
+
+Useful links:
+Groq Console: https://console.groq.com/
+GitHub: https://github.com/
+Streamlit Community Cloud: https://share.streamlit.io/
+Streamlit deployment docs: https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy
